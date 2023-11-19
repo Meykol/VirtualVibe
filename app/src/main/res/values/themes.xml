@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.VirtualVibe" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/PrimaryLT</item>
+        <item name="colorPrimaryDark">@color/SecondaryLT</item>
+        <item name="colorAccent">@color/TertiaryLT</item>
+    </style>
+
+    <style name="Theme.VirtualVibe" parent="Base.Theme.VirtualVibe" />
+</resources>

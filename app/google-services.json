@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "538875969109",
+    "project_id": "virtualvibe-f98d4",
+    "storage_bucket": "virtualvibe-f98d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538875969109:android:96cc3261a468081da2dedc",
+        "android_client_info": {
+          "package_name": "com.example.virtualvibe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN7JIdBhdGZq5Jq3IFAWF_GYdHY8coVAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
