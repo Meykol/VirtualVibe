@@ -13,8 +13,7 @@
 
         <include
             android:id="@+id/main_page_toolbar"
-            layout="@layout/app_bar_layout"
-         />
+            layout="@layout/app_bar_layout" />
 
         <FrameLayout
             android:id="@+id/main_container"
@@ -28,10 +27,61 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/all_user_post_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
-    </RelativeLayout>
+                android:layout_height="match_parent">
 
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fltbtn_Post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#443C68"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/addpost_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:maxImageSize="30dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fltbtn_PostText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:tint="#FFFFFF"
+                app:layout_constraintBottom_toTopOf="@+id/fltbtn_Post"
+                app:layout_constraintEnd_toEndOf="@+id/fltbtn_Post"
+                app:srcCompat="@drawable/addedit_btn"
+                app:maxImageSize="25dp"
+                android:visibility="invisible"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fltbtn_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:tint="#FFFFFF"
+                app:layout_constraintBottom_toTopOf="@+id/fltbtn_PostText"
+                app:layout_constraintEnd_toEndOf="@+id/fltbtn_PostText"
+                app:srcCompat="@drawable/addphoto_btn"
+                app:maxImageSize="25dp"
+                android:visibility="invisible"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
     <!-- For navigation view -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"

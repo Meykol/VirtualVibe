@@ -1,5 +1,7 @@
 package com.example.virtualvibe;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,14 +9,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.ims.ImsMmTelManager;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +34,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import kotlin.Lazy;
 
 
 public class MainActivity extends AppCompatActivity
@@ -42,13 +49,54 @@ public class MainActivity extends AppCompatActivity
     private DatabaseReference UsersRef;
     private CircleImageView NavProfileImage;
     private TextView NavProfileName;
+    private TextView NavProfileUsername;
     String currentUserID;
-
+    private Animation rotateOpen;
+    private Animation rotateClose;
+    private Animation fromBottom;
+    private Animation toBottom;
+    private FloatingActionButton Postbtn;
+    private FloatingActionButton PostTextbtn;
+    private FloatingActionButton PostImgbtn;
+    private boolean clicked;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //used for floating button
+        rotateOpen = AnimationUtils.loadAnimation(this,R.anim.rotate_open_animation);
+        rotateClose = AnimationUtils.loadAnimation(this,R.anim.rotate_close_animation);
+        fromBottom = AnimationUtils.loadAnimation(this,R.anim.from_bottom_animation);
+        toBottom = AnimationUtils.loadAnimation(this,R.anim.to_bottom_animation);
+       // toBottom = android.view.animation.AnimationUtils.loadAnimation(this,R.anim.to_bottom_animation);
+
+        //Onclick for the floating button
+        clicked = false;
+        Postbtn = (FloatingActionButton) findViewById(R.id.fltbtn_Post);
+        PostTextbtn = (FloatingActionButton) findViewById(R.id.fltbtn_PostText);
+        PostImgbtn = (FloatingActionButton) findViewById(R.id.fltbtn_Img);
+
+        Postbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAddButtonClicked();
+            }
+        });
+        PostTextbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "PostText", Toast.LENGTH_SHORT).show();
+            }
+        });
+        PostImgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "PostImg", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         //Referencing User to the firebase realtimedatabase
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -74,6 +122,7 @@ public class MainActivity extends AppCompatActivity
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
         NavProfileImage = (CircleImageView) navView.findViewById(R.id.nav_profile_image);
         NavProfileName = (TextView) navView.findViewById(R.id.nav_user_full_name);
+        NavProfileUsername = (TextView)navView.findViewById(R.id.nav_user_name);
 
         UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener()
         {
@@ -84,8 +133,13 @@ public class MainActivity extends AppCompatActivity
                 {
                     if(snapshot.hasChild("username"))
                     {
-                        String username = snapshot.child("username").getValue().toString();
-                        NavProfileName.setText(username);
+                        String usernameID = snapshot.child("username").getValue().toString();
+                        NavProfileName.setText("@"+usernameID);
+                    }
+                    if(snapshot.hasChild("firstname"))
+                    {
+                        String username = snapshot.child("firstname").getValue().toString();
+                        NavProfileUsername.setText(username);
                     }
                     if(snapshot.hasChild("Profile Image"))
                     {
@@ -114,6 +168,38 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+    }
+
+    private void onAddButtonClicked(){
+        setVisibility(clicked);
+        setAnimation(clicked);
+        if (!clicked) clicked = true;
+        else {
+            clicked = false;
+        }
+    }
+
+    private void setAnimation(boolean clicked) {
+        if(!clicked) {
+            Postbtn.startAnimation(rotateOpen);
+            PostTextbtn.startAnimation(fromBottom);
+            PostImgbtn.startAnimation(fromBottom);
+        }else {
+            Postbtn.startAnimation(rotateClose);
+            PostTextbtn.startAnimation(toBottom);
+            PostImgbtn.startAnimation(toBottom);
+        }
+    }
+    private void setVisibility(boolean clicked) {
+        if (!clicked)
+        {
+            PostTextbtn.setVisibility(View.VISIBLE);
+            PostImgbtn.setVisibility(View.VISIBLE);
+        }
+        else {
+            PostTextbtn.setVisibility(View.INVISIBLE);
+            PostImgbtn.setVisibility(View.INVISIBLE);
+        }
     }
 
     // run at the start of the program to check if register or not
