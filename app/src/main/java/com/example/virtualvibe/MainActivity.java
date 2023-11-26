@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity
         rotateClose = AnimationUtils.loadAnimation(this,R.anim.rotate_close_animation);
         fromBottom = AnimationUtils.loadAnimation(this,R.anim.from_bottom_animation);
         toBottom = AnimationUtils.loadAnimation(this,R.anim.to_bottom_animation);
-       // toBottom = android.view.animation.AnimationUtils.loadAnimation(this,R.anim.to_bottom_animation);
 
         //Onclick for the floating button
         clicked = false;
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "PostText", Toast.LENGTH_SHORT).show();
+                SendUserToPostActivity();
             }
         });
         PostImgbtn.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +170,13 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    private void SendUserToPostActivity()
+    {
+        Intent addNewPostIntent = new Intent(MainActivity.this, PostActivity.class);
+        startActivity(addNewPostIntent);
+    }
+
+    //used for the floating button in posting img and more
     private void onAddButtonClicked(){
         setVisibility(clicked);
         setAnimation(clicked);
