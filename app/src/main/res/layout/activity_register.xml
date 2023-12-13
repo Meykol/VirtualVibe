@@ -100,13 +100,19 @@
         android:layout_width="325dp"
         android:layout_height="50dp"
         android:layout_below="@id/CBterms_and_conditions"
-        android:layout_centerInParent="true"
+        android:layout_alignStart="@+id/CBterms_and_conditions"
+        android:layout_alignEnd="@+id/CBterms_and_conditions"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="-83dp"
         android:background="@drawable/button"
+        android:enabled="false"
         android:text="Create Account"
         android:textColor="#ffff"
         android:textColorLink="#9164AC"
-        android:textSize="16dp" />
+        android:textSize="16dp"
+        />
 
     <TextView
         android:id="@+id/textView3"

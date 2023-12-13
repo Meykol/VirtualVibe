@@ -146,7 +146,7 @@
         android:layout_height="50dp"
         android:layout_below="@id/textView4"
         android:layout_centerInParent="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button"
         android:drawableLeft="@drawable/google"
         android:drawablePadding="-70dp"
