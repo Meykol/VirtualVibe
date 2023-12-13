@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity
     private Button CreateAccountButton;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
+    private TextView ExistingAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,12 +34,23 @@ public class RegisterActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        ExistingAccount = (TextView) findViewById(R.id.login_account_link);
         UserEmail = (EditText) findViewById(R.id.register_email);
         UserPassword = (EditText) findViewById(R.id.register_password);
         UserConfirmPassword = (EditText) findViewById(R.id.register_confirm_password);
         CreateAccountButton = (Button) findViewById(R.id.create_account_btn);
         mAuth = FirebaseAuth.getInstance();
         loadingBar = new ProgressDialog(this);
+
+        //If button is click send user to the loginactivity
+        ExistingAccount.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                SendUserToLoginActivity();
+            }
+        });
 
         //If button is click the account will be created
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +60,12 @@ public class RegisterActivity extends AppCompatActivity
                 CreateNewAccount();
             }
         });
+    }
+    //If button is click send user to the loginactivity
+    private void SendUserToLoginActivity()
+    {
+        Intent LoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(LoginIntent);
     }
 
     //If the account is already signed in previously no need to login again after opening the app
