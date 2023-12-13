@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="PrimaryLT">#ffff</color>
-    <color name="SecondaryLT">#ed4</color>
+    <color name="SecondaryLT">#313866</color>
     <color name="TertiaryLT">#67c415</color>
 
     <color name="PrimaryDK">#000</color>
-    <color name="SecondaryDK">#ed4</color>
+    <color name="SecondaryDK">#313866</color>
     <color name="TertiaryDK">#67c415</color>
 </resources>
