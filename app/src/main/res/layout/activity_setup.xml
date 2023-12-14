@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SetupActivity"
-    android:background="@drawable/register">
+    android:background="#ffff">
 
 
     <!--For Circular image imported from Github -->
@@ -17,90 +17,134 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="110dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/profile" />
+    <TextView
+        android:id="@+id/textViewsign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/setup_username"
+        android:layout_marginTop="-30dp"
+        android:paddingLeft="50dp"
+        android:text="Create your "
+        android:textColor="#7363BF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewacc"
+        app:layout_constraintTop_toTopOf="@+id/textViewacc"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="42dp" />
+
+    <TextView
+        android:id="@+id/textViewacc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/setup_username"
+        android:layout_marginTop="-30dp"
+        android:paddingLeft="160dp"
+        android:text="account"
+        android:textColor="#9164AC"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textViewsign"
+        tools:layout_editor_absoluteY="305dp" />
 
     <EditText
         android:id="@+id/setup_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="7dp"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/setup_profile_image"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="55dp"
         android:background="@drawable/input"
         android:drawableLeft="@drawable/username"
         android:ems="10"
-        android:gravity="start|top"
         android:hint="username"
         android:inputType="textMultiLine"
         android:padding="14dp" />
 
     <EditText
         android:id="@+id/setup_firstname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/setup_username"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="1000dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="295dp"
+        android:layout_marginTop="15dp"
+        android:inputType="textPersonName"
         android:background="@drawable/input"
         android:drawableLeft="@drawable/name"
         android:ems="10"
-        android:gravity="top"
         android:hint="First Name"
-        android:inputType="textMultiLine"
         android:padding="14dp" />
 
     <EditText
         android:id="@+id/setup_lastname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="235dp"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/setup_firstname"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:inputType="textPersonName"
         android:background="@drawable/input"
         android:drawableLeft="@drawable/name"
         android:ems="10"
         android:gravity="top"
         android:hint="Last Name"
-        android:inputType="textMultiLine"
         android:padding="14dp" />
 
     <EditText
         android:id="@+id/setup_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="175dp"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/setup_lastname"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
         android:background="@drawable/input"
         android:drawableLeft="@drawable/username"
         android:ems="10"
-        android:hint="Phone"
+        android:hint="Contact no."
         android:inputType="phone"
         android:padding="14dp" />
 
+    <TextView
+        android:id="@+id/textviewbday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setup_phone"
+        android:layout_marginTop="15dp"
+        android:layout_alignLeft="@id/setup_phone"
+        android:layout_marginLeft="15dp"
+        android:text="Birthday"
+        android:textColor="#B2B1B3"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/birthday_btn"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/textviewbday"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="-5dp"
+        android:text="JAN 01 2020"
+        android:textColor="#000"
+        android:textSize="16dp"
+        style="?android:spinnerStyle"
+        android:onClick="openDatePicker"
+        />
+
     <Button
         android:id="@+id/setup_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="90dp"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/birthday_btn"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
         android:background="@drawable/button"
-        android:padding="14dp"
         android:text="Save"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textColor="#ffff"
+        android:textSize="16dp"
+        android:enabled="false"/>
 
 </RelativeLayout>

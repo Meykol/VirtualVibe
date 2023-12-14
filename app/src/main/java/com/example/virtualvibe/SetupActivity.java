@@ -4,13 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,6 +37,7 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -46,6 +53,9 @@ public class SetupActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private StorageReference UserProfileImageRef;
     private DatabaseReference UsersRef;
+    private DatePickerDialog datePickerDialog;
+    private Button birthdayButton;
+    String[] gender = {"Male", "Female", "Prefer not to say", "LGBTQIA+"};
     String currentUserId;
 
     final static int Gallery_Pick = 1;
@@ -63,6 +73,10 @@ public class SetupActivity extends AppCompatActivity
         SaveInformationButton = (Button) findViewById(R.id.setup_btn);
         ProfileImage = (CircleImageView) findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(this);
+
+        initDatePicker();
+        birthdayButton = (Button) findViewById(R.id.birthday_btn);
+        birthdayButton.setText(getCurrentDate());
 
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
@@ -119,7 +133,88 @@ public class SetupActivity extends AppCompatActivity
             }
         });
     }
-//Use for cropping image in a circular form for profile and save to firebase
+
+    //current date
+    private String getCurrentDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day,month,year);
+    }
+
+    //for birthday
+    private void initDatePicker()
+    {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day)
+            {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                birthdayButton.setText(date);
+            }
+        };
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+    }
+
+    private String makeDateString(int day, int month, int year)
+    {
+        if(year >= 2007)
+        {
+            Toast.makeText(SetupActivity.this, "Age should be 17 and above", Toast.LENGTH_SHORT).show();
+            SaveInformationButton.setEnabled(false);
+            return getMonth(month) + " " + day + " " + year;
+        }
+        else
+        {
+            SaveInformationButton.setEnabled(true);
+            return getMonth(month) + " " + day + " " + year;
+        }
+    }
+
+    private String getMonth(int month)
+    {
+        if(month == 1)
+            return "January";
+        if(month == 2)
+            return "February";
+        if(month == 3)
+            return "March";
+        if(month == 4)
+            return "April";
+        if(month == 5)
+            return "May";
+        if(month == 6)
+            return "June";
+        if(month == 7)
+            return "July";
+        if(month == 8)
+            return "August";
+        if(month == 9)
+            return "September";
+        if(month == 10)
+            return "October";
+        if(month == 11)
+            return "November";
+        if(month == 12)
+            return "December";
+        return "January";
+    }
+public void openDatePicker(View v)
+{
+    datePickerDialog.show();
+}
+    //Use for cropping image in a circular form for profile and save to firebase
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
