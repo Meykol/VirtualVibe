@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_nav"
+        android:title="Home"
+        android:icon="@drawable/sample"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/search_nav"
+        android:title="Search"
+        android:icon="@drawable/logo"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/fab"
+        android:title=""
+        android:enabled="false"
+        />
+    <item
+        android:id="@+id/event_nav"
+        android:title="Events"
+        android:icon="@drawable/logowtxt"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/message_nav"
+        android:title="Chat"
+        android:icon="@drawable/logonotxt"
+        android:enabled="true"/>
+
+</menu>

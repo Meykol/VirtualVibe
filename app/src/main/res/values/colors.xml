@@ -7,4 +7,6 @@
     <color name="PrimaryDK">#313866</color>
     <color name="SecondaryDK">#313866</color>
     <color name="TertiaryDK">#ffff</color>
+
+    <color name="BotNav">#313866</color>
 </resources>

@@ -30,12 +30,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
+    implementation("com.google.android.material:material:1.3.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     //for firebase authentication, database, and storage
     implementation("com.google.firebase:firebase-auth:22.1.2")
